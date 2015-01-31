@@ -57,11 +57,11 @@ extern "C" {
 #include <marker.h>
 #else /* ARM_MARKERS */
 #define MARKER_INIT
-#define MARKER_START
-#define MARKER_STOP
-#define MARKER_BEGIN(x,y)
-#define MARKER_END(x,y)
-#define MARKER_INFO(x,y)
+#define MARKER_START(myrank)
+#define MARKER_STOP(myrank)
+#define MARKER_BEGIN(id,thread)
+#define MARKER_END(id,thread)
+#define MARKER_INFO(level,msg)
 #endif /* ARM_MARKERS */
 
 #ifdef __cplusplus

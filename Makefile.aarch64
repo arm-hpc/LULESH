@@ -23,7 +23,8 @@ OBJECTS2.0 = $(SOURCES2.0:.cc=.o)
 
 #Default build suggestions with OpenMP for g++
 #CXXFLAGS = -g -O3 -fopenmp -I. -Wall -ftree-vectorize -fomit-frame-pointer -funsafe-math-optimizations -funroll-loops
-CXXFLAGS = -g -O3 -fopenmp -I. -DARM_MARKERS -DGEM5_MARKERS -Wall -march=armv8-a+fp+simd -ftree-vectorize -fomit-frame-pointer -funsafe-math-optimizations -funroll-loops -fdump-tree-vect-all-all -ftree-vectorizer-verbose=6
+CXXFLAGS = -g -O3 -fopenmp -I. -DARM_MARKERS -DGEM5_MARKERS -Wall -march=armv8-a+fp+simd -ftree-vectorize -fomit-frame-pointer -funsafe-math-optimizations -funroll-loops 
+#-fdump-tree-vect-all-all -ftree-vectorizer-verbose=6
 LDFLAGS = -g -O3 -fopenmp
 
 #Below are reasonable default flags for a serial build

@@ -2699,6 +2699,7 @@ int main(int argc, char *argv[])
    ParseCommandLineOptions(argc, argv, myRank, &opts);
 
    if ((myRank == 0) && (opts.quiet == 0)) {
+      MARKER_INIT;
       printf("Running problem size %d^3 per domain until completion\n", opts.nx);
       printf("Num processors: %d\n", numRanks);
 #if _OPENMP
@@ -2722,7 +2723,6 @@ int main(int argc, char *argv[])
    locDom = new Domain(numRanks, col, row, plane, opts.nx,
                        side, opts.numReg, opts.balance, opts.cost) ;
 
-
 #if USE_MPI
    fieldData = &Domain::nodalMass ;
 
@@ -2739,8 +2739,11 @@ int main(int argc, char *argv[])
    MPI_Barrier(MPI_COMM_WORLD);
 #endif
 
-   MARKER_INIT;
-   MARKER_START;
+   MARKER_START(myRank);
+#if USE_MPI && defined ( ARM_MARKERS )
+   // Redundant barrier to make sure instrumentation is on same page
+   MPI_Barrier(MPI_COMM_WORLD);
+#endif
 
    // BEGIN timestep to solution */
    Real_t start;
@@ -2778,7 +2781,7 @@ int main(int argc, char *argv[])
    elapsed_timeG = elapsed_time;
 #endif
 
-   MARKER_STOP;
+   MARKER_STOP(myRank);
 
    // Write out final viz file */
    if (opts.viz) {
