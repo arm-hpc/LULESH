@@ -8,8 +8,8 @@ LULESH_EXEC = lulesh2.0
 MPI_INC =
 MPI_LIB =
 
-SERCXX = aarch64-linux-gnu-g++ -DUSE_MPI=0
-MPICXX = mpic++ -DUSE_MPI=1
+SERCXX = aarch64-linux-gnu-g++ -DUSE_MPI=0 -DUSE_OMP=0
+MPICXX = mpic++ -DUSE_MPI=1 -DUSE_OMP=1
 CXX = $(MPICXX)
 #CXX = $(SERCXX)
 

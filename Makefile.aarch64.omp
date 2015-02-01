@@ -3,15 +3,16 @@
 SHELL = /bin/sh
 .SUFFIXES: .cc .o
 
-LULESH_EXEC = lulesh2.0
+LULESH_EXEC = lulesh2.0-omp
 
 MPI_INC = 
 MPI_LIB =
 
 SERCXX = aarch64-linux-gnu-g++ -DUSE_MPI=0
 MPICXX = mpic++ -DUSE_MPI=1
+OMPCXX = aarch64-linux-gnu-g++ -DUSE_MPI=0 -DUSE_OMP=1
 #CXX = $(MPICXX)
-CXX = $(SERCXX)
+CXX = $(OMPCXX)
 
 SOURCES2.0 = \
 	lulesh.cc \
